@@ -18,6 +18,15 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get('/api/timestamp/*', (req, res)=>{
+	console.log("Timestamp route called");
+	let result = {
+		"unix": new Date().getTime(),
+		"utc": new Date().toGMTString()
+	}
+	res.send(result);
+});
+
 app.get('/api/timestamp/:date_string', (req, res)=>{
 	let date_string = req.params.date_string;
 	let date;
@@ -35,14 +44,7 @@ app.get('/api/timestamp/:date_string', (req, res)=>{
 	});
 })
 
-app.get('/api/timestamp/*', (req, res)=>{
-	console.log("Timestamp route called");
-	let result = {
-		"unix": new Date().getTime(),
-		"utc": new Date().toGMTString()
-	}
-	res.send(result);
-});
+
 
 
 // listen for requests :)
